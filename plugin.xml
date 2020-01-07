@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
-<plugin id="cordova-plugin-siri-shortcuts" version="0.0.9" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+<plugin id="cordova-plugin-siri-shortcuts-updated" version="0.0.9" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
     <name>SiriShortcuts</name>
     <js-module name="SiriVoiceKit" src="www/SiriShortcuts.js">
         <clobbers target="cordova.plugins.SiriShortcuts" />
     </js-module>
 
-    <dependency id="cordova-plugin-add-swift-support" version="1.7.2"/>
+    <dependency id="cordova-plugin-add-swift-support" version="2.0.2"/>
 
     <platform name="ios">
         <config-file target="config.xml" parent="/*">
