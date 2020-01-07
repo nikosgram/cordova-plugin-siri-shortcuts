@@ -1,6 +1,6 @@
 {
   "name": "cordova-plugin-siri-shortcuts-updated",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "This plugin enables the use of Siri shortcuts in Cordova.",
   "cordova": {
     "id": "cordova-plugin-siri-shortcuts-updated",
