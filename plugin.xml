@@ -2,7 +2,7 @@
 <plugin id="cordova-plugin-siri-shortcuts-updated" version="0.0.12" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
     <name>SiriShortcuts</name>
     <js-module name="SiriVoiceKit" src="www/SiriShortcuts.js">
-        <clobbers target="cordova.plugins.SiriShortcuts" />
+        <clobbers target="SiriShortcuts" />
     </js-module>
 
     <dependency id="cordova-plugin-add-swift-support" version="^2.0.0"/>
