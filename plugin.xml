@@ -1,12 +1,12 @@
 <?xml version='1.0' encoding='utf-8'?>
-<plugin id="cordova-plugin-siri-shortcuts-updated" version="0.0.11" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+<plugin id="cordova-plugin-siri-shortcuts-updated" version="0.0.9" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
     <name>SiriShortcuts</name>
     <js-module name="SiriVoiceKit" src="www/SiriShortcuts.js">
         <clobbers target="cordova.plugins.SiriShortcuts" />
     </js-module>
 
-    <dependency id="cordova-plugin-add-swift-support" version="^2.0.0"/>
-    
+    <dependency id="cordova-plugin-add-swift-support" version="2.0.2"/>
+
     <platform name="ios">
         <config-file target="config.xml" parent="/*">
             <feature name="SiriShortcuts">
@@ -18,32 +18,14 @@
                 <string>$PACKAGE_NAME.shortcut</string>
             </array>
         </config-file>
-
-        <config-file parent="com.apple.security.application-groups" target="*-Debug.plist">
-            <array>
-                <string>group.__APP_IDENTIFIER__</string>
-            </array>
-        </config-file>
-        <config-file parent="com.apple.security.application-groups" target="*-Release.plist">
-            <array>
-                <string>group.__APP_IDENTIFIER__</string>
-            </array>
-        </config-file>
-
-        <config-file parent="com.apple.developer.siri" target="*-Debug.plist">
-            <true/>
-        </config-file>
-        <config-file parent="com.apple.developer.siri" target="*-Release.plist">
-            <true/>
-        </config-file>
+        <header-file src="src/ios/SiriShortcuts-Bridging-Header.h"/>
+        <header-file src="src/ios/AppDelegate+SiriShortcuts.h" />
 
         <source-file src="src/ios/SiriShortcuts.swift" />
+        <source-file src="src/ios/ActivityDataHolder.swift" />
+        <source-file src="src/ios/UserActivityDelegate.swift" />
+        <source-file src="src/ios/AppDelegate+SiriShortcuts.m" />
         <source-file src="src/ios/ShortcutPresentedDelegate.swift" />
-        <source-file src="SiriIntents/ActivateButtonIntent.intentdefinition" />
 
-        <hook type="after_platform_add" src="hooks/prerequisites.js"/>
-        <hook type="after_platform_add" src="hooks/copyExtensionFolderToIosProjectFolder.js"/>
-        <hook type="after_platform_add" src="hooks/addFilesToProject.js"/>
-        <hook type="after_prepare" src="hooks/fixAppEntitlements.js"/>
     </platform>
 </plugin>

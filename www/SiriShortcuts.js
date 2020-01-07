@@ -1,9 +1,9 @@
 var exec = require('cordova/exec');
 
 /**
- * Present shortcut to the user, will popup a view controller asking the user to add it to Siri
- * @param {object} options Options to specify for the shortcut
- * @param {string} options.id Specify an identifier to uniquely identify the shortcut, in order to be able to edit it
+ * Donate shortcut to Siri
+ * @param {object} options Options to specify for the donation
+ * @param {string} options.persistentIdentifier Specify an identifier to uniquely identify the shortcut, in order to be able to remove it
  * @param {string} options.title Specify a title for the shortcut, which is visible to the user as the name of the shortcut
  * @param {string} options.suggestedInvocationPhrase Specify the phrase to give the user some inspiration on what the shortcut to call
  * @param {object} options.userInfo Provide a key-value object that contains information about the shortcut, this will be returned in the getActivatedShortcut method. It is not possible to use the persistentIdentifier key, it is used internally
@@ -13,45 +13,48 @@ var exec = require('cordova/exec');
  * @param {function(error) : void} error Function to call upon unsuccessful donation, for example if the user has an iOS version < 12.0
  * @return void
  */
-exports.addActivity = function (options, success, error) {
-    exec(success, error, 'SiriShortcuts', 'add', [options.id, options.title, options.suggestedInvocationPhrase, options.userInfo, options.isEligibleForSearch, options.isEligibleForPrediction]);
+exports.donate = function (options, success, error) {
+    exec(success, error, 'SiriShortcuts', 'donate', [options.persistentIdentifier, options.title, options.suggestedInvocationPhrase, options.userInfo, options.isEligibleForSearch, options.isEligibleForPrediction]);
 };
-
 
 /**
  * Present shortcut to the user, will popup a view controller asking the user to add it to Siri
  * @param {object} options Options to specify for the shortcut
- * @param {string} options.id Specify an identifier to uniquely identify the shortcut, in order to be able to edit it
+ * @param {string} options.persistentIdentifier Specify an identifier to uniquely identify the shortcut, in order to be able to remove it
  * @param {string} options.title Specify a title for the shortcut, which is visible to the user as the name of the shortcut
  * @param {string} options.suggestedInvocationPhrase Specify the phrase to give the user some inspiration on what the shortcut to call
+ * @param {object} options.userInfo Provide a key-value object that contains information about the shortcut, this will be returned in the getActivatedShortcut method. It is not possible to use the persistentIdentifier key, it is used internally
  * @param {function() : void} success Function to call upon successful donation
  * @param {function(error) : void} error Function to call upon unsuccessful donation, for example if the user has an iOS version < 12.0
  * @return void
  */
-exports.add = function (options, success, error) {
-    exec(success, error, 'SiriShortcuts', 'add', [options.id, options.title, options.suggestedInvocationPhrase]);
+exports.present = function (options, success, error) {
+    exec(success, error, 'SiriShortcuts', 'present', [options.persistentIdentifier, options.title, options.suggestedInvocationPhrase, options.userInfo, options.isEligibleForSearch, options.isEligibleForPrediction]);
 };
 
 /**
- * Present existing shortcut to the user, will popup a view controller asking the user to edit it
- * @param {object} options Options to specify for the shortcut
- * @param {string} options.uuid Specify an identifier to uniquely identify the shortcut, in order to be able to remove it
- * @param {function() : void} success Function to call upon successful donation
- * @param {function(error) : void} error Function to call upon unsuccessful donation, for example if the user has an iOS version < 12.0
+ * Remove shortcuts based on identifiers
+ * @param {string|string[]} persistentIdentifiers Specify which shortcut(s) to delete by their persistent identifiers
+ * @param {function() : void} success Function to call upon successful removal
+ * @param {function(error) : void} error  Function to call upon unsuccessful removal
  * @return void
  */
-exports.edit = function (options, success, error) {
-    exec(success, error, 'SiriShortcuts', 'edit', [options.uuid]);
+exports.remove = function (persistentIdentifiers, success, error) {
+    if (typeof persistentIdentifiers === 'string') {
+        persistentIdentifiers = [persistentIdentifiers];
+    }
+
+    exec(success, error, 'SiriShortcuts', 'remove', [persistentIdentifiers]);
 };
 
 /**
- * Gets all shortcuts from the application
- * @param {function() : void} success Function to call upon successful retrieval
- * @param {function(error) : void} error  Function to call upon unsuccessful retrieval
+ * Remove all shortcuts from the application
+ * @param {function() : void} success Function to call upon successful removal
+ * @param {function(error) : void} error  Function to call upon unsuccessful removal
  * @return void
  */
-exports.getAll = function(success, error) {
-    exec(success, error, 'SiriShortcuts', 'getAll');
+exports.removeAll = function(success, error) {
+    exec(success, error, 'SiriShortcuts', 'removeAll');
 };
 
 /**
