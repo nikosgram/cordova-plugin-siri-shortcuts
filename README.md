@@ -13,7 +13,7 @@ after the device has been initialised.
 
 This requires Cordova 6.0+
 
-    cordova plugin add cordova-plugin-siri-shortcuts-updated
+    cordova plugin add cordova-plugin-siri-shortcuts
 
 ## Api reference
 
