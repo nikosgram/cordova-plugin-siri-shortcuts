@@ -1,4 +1,5 @@
-# cordova-plugin-siri-shortcuts
+# cordova-plugin-siri-shortcuts-updated
+!['npm-version'](https://img.shields.io/npm/v/cordova-plugin-siri-shortcuts-updated.svg?style=flat-square)
 
 ## Heads up!
 The plugin only works in XCode 10, and on the iOS 12 platform.
